@@ -1,0 +1,36 @@
+@HOST=http://localhost
+@PORT=:8080
+@baseURL={{HOST}}{{PORT}}
+
+
+### Create book
+POST {{baseURL}}/create
+Content-Type: "application/json"
+
+{
+  "title": "Things Fall Apart",
+  "author": "Chinua Achebe",
+  "year": 1958,
+  "country": "Nigeria",
+  "pages": 209
+}
+
+
+### Get one book
+GET {{baseURL}}/book/67eb2591f27b7caf6abd5e43 HTTP/1.1
+Accept: "application/json"
+
+### Update one book
+POST {{baseURL}}/update/67eb23a465a5f21146b38a23
+Content-Type: "application/json"
+
+{
+  "title": "Things Fall Apart",
+  "author": "Chinua Achebe",
+  "year": 1958,
+  "country": "Nigeria",
+  "pages": 2099
+}
+
+### Delete one book
+DELETE {{baseURL}}/delete/67eb2591f27b7caf6abd5e43 HTTP/1.1

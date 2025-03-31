@@ -1,17 +1,17 @@
 package main
 
-
 import (
 	"context"
-	"go.mongodb.org/mongo-driver/v2/bson"
-    "go.mongodb.org/mongo-driver/v2/mongo"
-    "go.mongodb.org/mongo-driver/v2/mongo/options"
-    "go.mongodb.org/mongo-driver/v2/mongo/readpref"
 	"fmt"
 	"log"
+
+	"go.mongodb.org/mongo-driver/v2/bson"
+	"go.mongodb.org/mongo-driver/v2/mongo"
+	"go.mongodb.org/mongo-driver/v2/mongo/options"
+	"go.mongodb.org/mongo-driver/v2/mongo/readpref"
 )
 
-func main()  {
+func main() {
 	ctx := context.TODO()
 	opts := options.Client().ApplyURI("mongodb://localhost:27017")
 
@@ -20,7 +20,7 @@ func main()  {
 	if err != nil {
 		log.Fatal(err)
 	}
-	
+
 	// Close current connection
 	defer client.Disconnect(ctx)
 
@@ -38,7 +38,7 @@ func main()  {
 	}
 	fmt.Println(dbNames)
 
-	// Create new database and new collection 
+	// Create new database and new collection
 	exampleDB := client.Database("exdb")
 
 	fmt.Printf("%T\n", exampleDB)
@@ -138,7 +138,7 @@ func main()  {
 	if err != nil {
 		log.Fatal(err)
 	}
-	
+
 	var resExamples []bson.M
 	if err := allExamples.All(ctx, &resExamples); err != nil {
 		log.Fatal(err)
@@ -156,8 +156,8 @@ func main()  {
 
 	// Update one document
 	rUpd, err := exampleCollection.UpdateOne(
-		ctx, 
-		bson.M{"_id": r.InsertedID}, 
+		ctx,
+		bson.M{"_id": r.InsertedID},
 		bson.D{
 			{Key: "$set", Value: bson.M{"strEx": "Change string"}},
 		},
